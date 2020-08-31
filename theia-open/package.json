@@ -1,0 +1,36 @@
+{
+  "name": "@perrinjerome/theia-open",
+  "author": {
+    "name": "Jérome Perrin",
+    "email": "perrinjerome@gmail.com"
+  },
+  "description": "A theia extension to open files from command line",
+  "license": "MIT",
+  "keywords": [
+    "theia-extension"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@theia/core": "latest"
+  },
+  "devDependencies": {
+    "rimraf": "latest",
+    "typescript": "latest"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/open-editor-frontend-module",
+      "backend": "lib/node/open-editor-backend-module"
+    }
+  ]
+}
