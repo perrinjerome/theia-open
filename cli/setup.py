@@ -30,7 +30,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'theia-open=theia_open:main',
+            'theia-open=theia_open.cli:main',
         ],
     },
 )
