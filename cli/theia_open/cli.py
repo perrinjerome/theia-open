@@ -61,7 +61,10 @@ def main() -> None:
         headers=headers,
     )
     ret.raise_for_status()
-
+    while True:
+      time.sleep(1)
+      if not is_file_open():
+        return
 
   def is_file_open() -> bool:
     ret = requests.post(
