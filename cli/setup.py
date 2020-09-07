@@ -12,9 +12,10 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='theia-open',
-    version='0.1.1',
+    version='0.1.2',
     description='A command line to open file from within theia',
     long_description=long_description,
+    url='https://github.com/perrinjerome/theia-open/',
     long_description_content_type='text/markdown',
     classifiers=[
         'Intended Audience :: Developers',
