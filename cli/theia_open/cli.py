@@ -79,7 +79,8 @@ def main() -> None:
 
 
   def wait_for_editor_close(stdscr: _CursesWindow) -> int:
-
+    curses.start_color()
+    curses.use_default_colors()
     stdscr.clear()
     stdscr.addstr(
         0, 0,
