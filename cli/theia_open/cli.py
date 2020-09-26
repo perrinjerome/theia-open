@@ -61,8 +61,10 @@ def main() -> None:
         headers=headers,
     )
     ret.raise_for_status()
+    delay = 0
     while True:
-      time.sleep(1)
+      delay = min(delay + 0.1, 1)
+      time.sleep(delay)
       if not is_file_open():
         return
 
@@ -88,6 +90,7 @@ def main() -> None:
     stdscr.nodelay(True)
     stdscr.refresh()
 
+    delay = 0
     while True:
       k = stdscr.getch()
       if k == ord('q'):
@@ -96,8 +99,8 @@ def main() -> None:
       elif k == ord('a'):
         close_editor()
         return 1
-
-      time.sleep(1)
+      delay = min(delay + 0.1, 1)
+      time.sleep(delay)
       if not is_file_open():
         return 0
 
