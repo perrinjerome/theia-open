@@ -84,9 +84,12 @@ def main() -> None:
     curses.start_color()
     curses.use_default_colors()
     stdscr.clear()
-    stdscr.addstr(
-        0, 0,
-        f"Editing {filename}\nPress q to exit, or a to exit with error code.\n")
+    stdscr.addstr(0, 0, f"Editing {filename}")
+    stdscr.addstr(1, 0, "Press ")
+    stdscr.addstr("q", curses.A_BOLD)
+    stdscr.addstr(" to exit, or ")
+    stdscr.addstr("a", curses.A_BOLD)
+    stdscr.addstr(" to exit with error code.\n")
     stdscr.nodelay(True)
     stdscr.refresh()
 
