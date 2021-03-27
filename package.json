@@ -3,6 +3,7 @@
   "license": "See LICENCE.txt",
   "scripts": {
     "prepare": "lerna run prepare",
+    "watch": "lerna run watch",
     "rebuild:browser": "theia rebuild:browser"
   },
   "devDependencies": {
