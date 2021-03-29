@@ -19,7 +19,7 @@ class OpenEditorBrowserServiceImpl implements OpenEditorBrowserService {
 
   async openFile(filePath: string) {
     const widget = await this.editorManager.open(new URI(filePath));
-    await widget.activate();
+    widget.activate();
   }
 
   async closeFile(filePath: string) {
