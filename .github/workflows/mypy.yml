@@ -17,7 +17,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run mypy
         run: |
-          cd cli
+          cd cli-python
           pip install mypy
           pip install -e .
           mypy
