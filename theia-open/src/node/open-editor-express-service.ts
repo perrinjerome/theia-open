@@ -29,16 +29,20 @@ export class EditorOpenExpressService
         return res.status(400).send("Missing request parameter: filePath");
       }
 
-      if (req.params["method"] === "openFile") {
-        await this.service.openFile(filePath);
-        return res.status(200).send("OK");
-      }
-      if (req.params["method"] === "closeFile") {
-        await this.service.closeFile(filePath);
-        return res.status(200).send("OK");
-      }
-      if (req.params["method"] === "isFileOpen") {
-        return res.status(200).json(await this.service.isFileOpen(filePath));
+      try {
+        if (req.params["method"] === "openFile") {
+          await this.service.openFile(filePath);
+          return res.status(200).send("OK");
+        }
+        if (req.params["method"] === "closeFile") {
+          await this.service.closeFile(filePath);
+          return res.status(200).send("OK");
+        }
+        if (req.params["method"] === "isFileOpen") {
+          return res.status(200).json(await this.service.isFileOpen(filePath));
+        }
+      } catch (e) {
+        return res.status(500).send(e);
       }
     });
   }
