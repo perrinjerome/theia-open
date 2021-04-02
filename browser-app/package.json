@@ -22,6 +22,7 @@
   "scripts": {
     "prepare": "theia build --mode development",
     "start": "theia start",
+    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 theia start",
     "watch": "theia build --watch --mode development"
   },
   "theia": {
