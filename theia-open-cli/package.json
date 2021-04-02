@@ -1,0 +1,42 @@
+{
+  "name": "@perrinjerome/theia-open-cli",
+  "author": {
+    "name": "Jérome Perrin",
+    "email": "perrinjerome@gmail.com"
+  },
+  "description": "Command line application for `theia-open`",
+  "license": "MIT",
+  "keywords": [
+    "theia-extension"
+  ],
+  "version": "0.2.0",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "inquirer": "^3.2.2",
+    "yargs": "^13.3.0",
+    "node-fetch": "^2.6.0"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "type": "module",
+  "main": "./lib/index.js",
+  "bin": {
+    "theia-open": "./lib/index.js"
+  },
+  "devDependencies": {
+    "@types/clear": "latest",
+    "@types/inquirer": "latest",
+    "prettier": "latest",
+    "rimraf": "latest",
+    "typescript": "latest"
+  }
+}

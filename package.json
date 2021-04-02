@@ -10,6 +10,8 @@
     "lerna": "2.4.0"
   },
   "workspaces": [
-    "theia-open", "browser-app"
+    "browser-app",
+    "theia-open-cli",
+    "theia-open"
   ]
 }
