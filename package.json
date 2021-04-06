@@ -4,6 +4,7 @@
   "scripts": {
     "prepare": "lerna run prepare",
     "watch": "lerna run watch",
+    "test": "lerna run test",
     "rebuild:browser": "theia rebuild:browser"
   },
   "devDependencies": {
