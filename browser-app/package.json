@@ -14,7 +14,8 @@
     "@theia/process": "latest",
     "@theia/terminal": "latest",
     "@theia/workspace": "latest",
-    "@perrinjerome/theia-open": ""
+    "@perrinjerome/theia-open": "",
+    "@perrinjerome/theia-open-cli": ""
   },
   "devDependencies": {
     "@theia/cli": "latest"
@@ -22,7 +23,7 @@
   "scripts": {
     "prepare": "theia build --mode development",
     "start": "theia start",
-    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 theia start",
+    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 EDITOR=\"node $(pwd)/node_modules/.bin/theia-open --wait\" GIT_EDITOR= theia start",
     "watch": "theia build --watch --mode development"
   },
   "theia": {

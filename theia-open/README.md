@@ -23,3 +23,18 @@ Set `EDITOR` environment variable in the shell, something similar to:
 export THEIA_URL=http://localhost:3000
 export EDITOR="theia-open --wait"
 ```
+
+# Demo
+
+```bash
+# install everything
+yarn install
+
+# run the example theia app
+cd browser-app
+yarn demo
+```
+This will start theia on http://localhost:3000 , with the necessary environment variables set (see the `demo` command in `browser-app/package.json`).
+
+When running git commands from theia's terminal, theia's text editor will be used instead of a default command line text editor.
+Try for example: `git config --edit --global`.
