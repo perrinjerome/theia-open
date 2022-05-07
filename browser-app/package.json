@@ -1,8 +1,10 @@
 {
   "private": true,
   "name": "browser-app",
-  "version": "0.0.0",
+  "version": "0.4.4",
   "dependencies": {
+    "@perrinjerome/theia-open": "",
+    "@perrinjerome/theia-open-cli": "",
     "@theia/core": "latest",
     "@theia/editor": "latest",
     "@theia/filesystem": "latest",
@@ -14,9 +16,7 @@
     "@theia/preferences": "latest",
     "@theia/process": "latest",
     "@theia/terminal": "latest",
-    "@theia/workspace": "latest",
-    "@perrinjerome/theia-open": "",
-    "@perrinjerome/theia-open-cli": ""
+    "@theia/workspace": "latest"
   },
   "devDependencies": {
     "@theia/cli": "latest"
