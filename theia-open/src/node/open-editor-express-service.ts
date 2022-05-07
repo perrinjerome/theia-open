@@ -1,5 +1,6 @@
 import * as express from "express";
 
+const { timingSafeEqual } = require('crypto');
 import { injectable, inject } from "inversify";
 import { BackendApplicationContribution } from "@theia/core/lib/node/backend-application";
 import { ILogger } from "@theia/core";
@@ -21,7 +22,7 @@ export class EditorOpenExpressService
         );
         return res.status(500).send("Server Error");
       }
-      if (req.header("X-Authentication-Token") !== token) {
+      if (!timingSafeEqual(Buffer.from(req.header("X-Authentication-Token") || "", "utf-8"),  Buffer.from(token, "utf-8"))) {
         return res.status(403).send("Unauthorized");
       }
       const filePath = req.body["filePath"];
