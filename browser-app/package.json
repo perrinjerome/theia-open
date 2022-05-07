@@ -10,6 +10,7 @@
     "@theia/messages": "latest",
     "@theia/monaco": "latest",
     "@theia/navigator": "latest",
+    "@theia/plugin-ext": "latest",
     "@theia/preferences": "latest",
     "@theia/process": "latest",
     "@theia/terminal": "latest",
@@ -21,9 +22,9 @@
     "@theia/cli": "latest"
   },
   "scripts": {
-    "prepare": "theia build --mode development",
+    "build": "theia build --mode development",
     "start": "theia start",
-    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 EDITOR=\"node $(pwd)/node_modules/.bin/theia-open --wait\" GIT_EDITOR= theia start",
+    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 EDITOR=\"node $(pwd)/node_modules/.bin/theia-open --wait\" GIT_EDITOR= VISUAL= theia start",
     "watch": "theia build --watch --mode development"
   },
   "theia": {

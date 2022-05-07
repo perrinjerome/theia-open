@@ -61,7 +61,7 @@ import fs from "fs";
 
   /* open files */
   for (const filePath of filePaths) {
-    const resp = await fetch(new URL("/api/openEditor/openFile", args.url), {
+    const resp = await fetch(new URL("/api/openEditor/openFile", args.url).toString(), {
       body: JSON.stringify({ filePath }),
       method: "POST",
       headers,
@@ -74,7 +74,7 @@ import fs from "fs";
 
   /* wait */
   async function isFileOpen(filePath: string) {
-    const resp = await fetch(new URL("/api/openEditor/isFileOpen", args.url), {
+    const resp = await fetch(new URL("/api/openEditor/isFileOpen", args.url).toString(), {
       body: JSON.stringify({ filePath }),
       method: "POST",
       headers,
@@ -86,7 +86,7 @@ import fs from "fs";
   }
 
   async function closeFile(filePath: string) {
-    await fetch(new URL("/api/openEditor/closeFile", args.url), {
+    await fetch(new URL("/api/openEditor/closeFile", args.url).toString(), {
       body: JSON.stringify({ filePath }),
       method: "POST",
       headers,
