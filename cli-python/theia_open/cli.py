@@ -52,7 +52,7 @@ def main() -> None:
   for filename in filenames:
     ret = requests.post(
         url=urllib.parse.urljoin(options.url, "/api/openEditor/openFile"),
-        json={'filePath': filename},
+        json={'uri': f'file://{filename}'},
         headers=headers,
     )
     ret.raise_for_status()
@@ -60,7 +60,7 @@ def main() -> None:
   def close_editor(filename) -> None:
     ret = requests.post(
         url=urllib.parse.urljoin(options.url, "/api/openEditor/closeFile"),
-        json={'filePath': filename},
+        json={'uri': f'file://{filename}'},
         headers=headers,
     )
     ret.raise_for_status()
@@ -74,7 +74,7 @@ def main() -> None:
   def is_file_open(filename) -> bool:
     ret = requests.post(
         url=urllib.parse.urljoin(options.url, "/api/openEditor/isFileOpen"),
-        json={'filePath': filename},
+        json={'uri': f'file://{filename}'},
         headers=headers,
     )
     ret.raise_for_status()

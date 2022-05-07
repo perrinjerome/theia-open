@@ -25,22 +25,22 @@ export class EditorOpenExpressService
       if (!timingSafeEqual(Buffer.from(req.header("X-Authentication-Token") || "", "utf-8"),  Buffer.from(token, "utf-8"))) {
         return res.status(403).send("Unauthorized");
       }
-      const filePath = req.body["filePath"];
-      if (!(typeof filePath === "string" && filePath)) {
-        return res.status(400).send("Missing request parameter: filePath");
+      const uri = req.body["uri"];
+      if (!(typeof uri === "string" && uri)) {
+        return res.status(400).send("Missing request parameter: uri");
       }
 
       try {
         if (req.params["method"] === "openFile") {
-          await this.service.openFile(filePath);
+          await this.service.openFile(uri);
           return res.status(200).send("OK");
         }
         if (req.params["method"] === "closeFile") {
-          await this.service.closeFile(filePath);
+          await this.service.closeFile(uri);
           return res.status(200).send("OK");
         }
         if (req.params["method"] === "isFileOpen") {
-          return res.status(200).json(await this.service.isFileOpen(filePath));
+          return res.status(200).json(await this.service.isFileOpen(uri));
         }
       } catch (e) {
         return res.status(500).send(e);

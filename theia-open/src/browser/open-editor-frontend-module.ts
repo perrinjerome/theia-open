@@ -17,18 +17,18 @@ class OpenEditorBrowserServiceImpl implements OpenEditorBrowserService {
     @inject(EditorManager) private readonly editorManager: EditorManager
   ) {}
 
-  async openFile(filePath: string) {
-    const widget = await this.editorManager.open(new URI(filePath));
+  async openFile(uri: string) {
+    const widget = await this.editorManager.open(new URI(uri));
     widget.activate();
   }
 
-  async closeFile(filePath: string) {
-    const widget = await this.editorManager.getByUri(new URI(filePath));
+  async closeFile(uri: string) {
+    const widget = await this.editorManager.getByUri(new URI(uri));
     widget?.close();
   }
 
-  async isFileOpen(filePath: string) {
-    const widget = await this.editorManager.getByUri(new URI(filePath));
+  async isFileOpen(uri: string) {
+    const widget = await this.editorManager.getByUri(new URI(uri));
     return widget !== undefined;
   }
 }

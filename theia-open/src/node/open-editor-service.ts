@@ -9,25 +9,25 @@ export class OpenEditorBackendServiceClientImpl
   implements OpenEditorBackendService {
   private client?: OpenEditorBrowserService;
 
-  async openFile(filePath: string) {
+  async openFile(uri: string) {
     if (!this.client) {
       throw new Error("Client is not connected !");
     }
-    await this.client.openFile(filePath);
+    await this.client.openFile(uri);
   }
 
-  async closeFile(filePath: string) {
+  async closeFile(uri: string) {
     if (!this.client) {
       throw new Error("Client is not connected !");
     }
-    await this.client.closeFile(filePath);
+    await this.client.closeFile(uri);
   }
 
-  async isFileOpen(filePath: string) {
+  async isFileOpen(uri: string) {
     if (!this.client) {
       throw new Error("Client is not connected !");
     }
-    return await this.client.isFileOpen(filePath);
+    return await this.client.isFileOpen(uri);
   }
 
   setClient(client: OpenEditorBrowserService): void {

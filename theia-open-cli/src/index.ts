@@ -40,18 +40,18 @@ import fs from "fs";
     process.exit(1);
   }
 
-  /* rebuild array of absolute filenames */
-  const filePaths = [];
+  /* rebuild array of URI, using the file:// scheme for existing files, or untitled:// for non existing files. */
+  const uris = [];
   for (let filePath of files) {
     if (!path.isAbsolute(filePath)) {
       filePath = path.join(process.cwd(), filePath);
     }
     const resolvedPath = path.resolve(filePath);
-    if (!fs.existsSync(resolvedPath)) {
-      console.error(chalk.red(`Failed to open ${resolvedPath}`));
-      process.exit(1);
+    let uri = new URL(`file://${resolvedPath}`);
+    if (!fs.existsSync(resolvedPath)){
+      uri = new URL(`untitled://${resolvedPath}`)
     }
-    filePaths.push(resolvedPath);
+    uris.push(uri)
   }
 
   const headers = {
@@ -60,55 +60,66 @@ import fs from "fs";
   };
 
   /* open files */
-  for (const filePath of filePaths) {
+  for (const uri of uris) {
     const resp = await fetch(new URL("/api/openEditor/openFile", args.url).toString(), {
-      body: JSON.stringify({ filePath }),
+      body: JSON.stringify({uri}),
       method: "POST",
       headers,
     });
     if (!resp.ok) {
-      console.error(chalk.red(`Failed to open ${filePath}`));
+      console.error(chalk.red(`Failed to open ${uri.pathname}`));
       process.exit(1);
     }
   }
 
   /* wait */
-  async function isFileOpen(filePath: string) {
-    const resp = await fetch(new URL("/api/openEditor/isFileOpen", args.url).toString(), {
-      body: JSON.stringify({ filePath }),
+  async function isFileOpen(uri: URL) : Promise<boolean> {
+    let resp = await fetch(new URL("/api/openEditor/isFileOpen", args.url).toString(), {
+      body: JSON.stringify({ uri }),
       method: "POST",
       headers,
     });
     if (!resp.ok) {
       return false;
     }
-    return (await resp.json()) as boolean;
+    let isOpen = (await resp.json()) as boolean;
+
+    /**
+     * If the file did not exist, we opened it with untitled:// scheme.
+     * If later the user saved it, the untitled:// is closed and the same
+     * uri with a file:// scheme was open instead, so we wait for the
+     * file:// url.
+     */
+    if (!isOpen && uri.protocol == 'untitled:') {
+      isOpen = await isFileOpen(new URL(`file://${uri.pathname}`))
+    }
+    return isOpen;
   }
 
-  async function closeFile(filePath: string) {
+  async function closeFile(uri: URL) {
     await fetch(new URL("/api/openEditor/closeFile", args.url).toString(), {
-      body: JSON.stringify({ filePath }),
+      body: JSON.stringify({ uri }),
       method: "POST",
       headers,
     });
   }
 
-  async function waitForFileOpen(filePath: string) {
+  async function waitForFileOpen(uri: URL) {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       await sleep(1000);
-      if (!(await isFileOpen(filePath))) {
+      if (!(await isFileOpen(uri))) {
         return;
       }
     }
   }
 
-  async function waitForUserExit(filePaths: string[]) {
+  async function waitForUserExit(uris: URL[]) {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       clear();
-      for (const filePath of filePaths) {
-        console.log(`Editing ${filePath}`);
+      for (const uri of uris) {
+        console.log(`Editing ${uri.pathname}`);
       }
       console.log();
 
@@ -125,7 +136,7 @@ import fs from "fs";
       }
       if (answers.exit === "Yes, with error code") {
         clear();
-        await Promise.all(filePaths.map(closeFile));
+        await Promise.all(uris.map(closeFile));
         process.exit(1);
       }
     }
@@ -137,11 +148,11 @@ import fs from "fs";
 
   if (args.wait) {
     await Promise.race([
-      waitForUserExit(filePaths),
-      Promise.all(filePaths.map(waitForFileOpen)),
+      waitForUserExit(uris),
+      Promise.all(uris.map(waitForFileOpen)),
     ]);
 
-    await Promise.all(filePaths.map(closeFile));
+    await Promise.all(uris.map(closeFile));
 
     clear();
     process.exit(0);
