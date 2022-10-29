@@ -24,7 +24,7 @@
   "scripts": {
     "build": "theia build --mode development",
     "start": "theia start",
-    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 EDITOR=\"node $(pwd)/node_modules/.bin/theia-open --wait\" GIT_EDITOR= VISUAL= theia start",
+    "demo": "THEIA_OPEN_EDITOR_TOKEN=test THEIA_URL=http://localhost:3000 EDITOR=\"node $(pwd)/../theia-open-cli/lib/index.js --wait\" GIT_EDITOR= VISUAL= theia start",
     "watch": "theia build --watch --mode development"
   },
   "theia": {
