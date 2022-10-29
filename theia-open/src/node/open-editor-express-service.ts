@@ -34,8 +34,8 @@ export class EditorOpenExpressService
 
       try {
         if (req.params["method"] === "openFile") {
-          await this.service.openFile(uri);
-          return res.status(200).send("OK");
+          const message = await this.service.openFile(uri);
+          return res.status(200).json({ message });
         }
         if (req.params["method"] === "closeFile") {
           await this.service.closeFile(uri);

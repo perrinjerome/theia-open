@@ -25,6 +25,7 @@ import fs from "fs";
       type: "boolean",
     });
 
+  const openWarnings: string[] = [];
   const args = argumentParser.argv;
   const files = args.file as string[];
   if (!files) {
@@ -72,6 +73,18 @@ import fs from "fs";
 ${await resp.text()}`));
       process.exit(1);
     }
+    const message = (await resp.json() as any).message;
+    if (message) {
+      openWarnings.push(message)
+    }
+  }
+  displayOpenWarnings();
+
+  /** Output the warnings received from servers when opening the file. */
+  function displayOpenWarnings(): void {
+    openWarnings.forEach(warning => {
+      console.log(warning)
+    });
   }
 
   /* wait */
@@ -120,6 +133,7 @@ ${await resp.text()}`));
     // eslint-disable-next-line no-constant-condition
     while (true) {
       clear();
+      displayOpenWarnings();
       for (const uri of uris) {
         console.log(`Editing ${uri.pathname}`);
       }

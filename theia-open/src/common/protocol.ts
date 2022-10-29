@@ -11,7 +11,7 @@ export interface OpenEditorBrowserService {
 export const OpenEditorBackendService = Symbol('OpenEditorBackendService');
 
 export interface OpenEditorBackendService {
-    openFile(uri: string): Promise<void>;
+    openFile(uri: string): Promise<void | string>;
     closeFile(uri: string): Promise<void>;
     isFileOpen(uri: string): Promise<boolean>;
 };

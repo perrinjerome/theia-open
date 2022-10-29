@@ -28,6 +28,7 @@ export default new ContainerModule((bind) => {
               OpenEditorBackendServiceClientImpl
             >(OpenEditorBackendService);
             server.setClient(client);
+            client.onDidCloseConnection(() => {server.clientDisconnected(client)});
             return server;
           }
         )
