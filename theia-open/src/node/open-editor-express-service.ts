@@ -5,6 +5,7 @@ import { injectable, inject } from "inversify";
 import { BackendApplicationContribution } from "@theia/core/lib/node/backend-application";
 import { ILogger } from "@theia/core";
 import { OpenEditorBackendService } from "../common/protocol";
+import { json } from 'body-parser';
 
 @injectable()
 export class EditorOpenExpressService
@@ -14,6 +15,7 @@ export class EditorOpenExpressService
   private readonly service: OpenEditorBackendService;
 
   configure(app: express.Application): void {
+    app.use(json())
     app.post("/api/openEditor/:method", async (req, res) => {
       const token = process.env["THEIA_OPEN_EDITOR_TOKEN"];
       if (token === undefined) {
