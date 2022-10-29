@@ -2,6 +2,7 @@
   "private": true,
   "license": "See LICENCE.txt",
   "scripts": {
+    "build": "lerna run build",
     "clean": "lerna run clean",
     "prepare": "lerna run prepare",
     "watch": "lerna run watch",

@@ -27,8 +27,9 @@ export EDITOR="theia-open --wait"
 # Demo
 
 ```bash
-# install everything
+# install and build everything
 yarn install
+yarn build # during development use yarn watch instead
 
 # run the example theia app
 cd browser-app
