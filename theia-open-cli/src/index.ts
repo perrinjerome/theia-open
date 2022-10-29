@@ -67,7 +67,9 @@ import fs from "fs";
       headers,
     });
     if (!resp.ok) {
-      console.error(chalk.red(`Failed to open ${uri.pathname}`));
+      console.error(chalk.red(
+        `Failed to open ${uri.pathname}
+${await resp.text()}`));
       process.exit(1);
     }
   }

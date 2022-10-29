@@ -45,7 +45,8 @@ export class EditorOpenExpressService
           return res.status(200).json(await this.service.isFileOpen(uri));
         }
       } catch (e) {
-        return res.status(500).send(e);
+        console.error(e)
+        return res.status(500).send(e.toString());
       }
     });
   }
