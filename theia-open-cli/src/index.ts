@@ -48,7 +48,7 @@ import fs from "fs";
     }
     const resolvedPath = path.resolve(filePath);
     let uri = new URL(`file://${resolvedPath}`);
-    if (!fs.existsSync(resolvedPath)){
+    if (!fs.existsSync(resolvedPath)) {
       uri = new URL(`untitled://${resolvedPath}`)
     }
     uris.push(uri)
@@ -62,7 +62,7 @@ import fs from "fs";
   /* open files */
   for (const uri of uris) {
     const resp = await fetch(new URL("/api/openEditor/openFile", args.url).toString(), {
-      body: JSON.stringify({uri}),
+      body: JSON.stringify({ uri }),
       method: "POST",
       headers,
     });
@@ -73,7 +73,7 @@ import fs from "fs";
   }
 
   /* wait */
-  async function isFileOpen(uri: URL) : Promise<boolean> {
+  async function isFileOpen(uri: URL): Promise<boolean> {
     let resp = await fetch(new URL("/api/openEditor/isFileOpen", args.url).toString(), {
       body: JSON.stringify({ uri }),
       method: "POST",

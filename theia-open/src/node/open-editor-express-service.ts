@@ -24,7 +24,7 @@ export class EditorOpenExpressService
         );
         return res.status(500).send("Server Error");
       }
-      if (!timingSafeEqual(Buffer.from(req.header("X-Authentication-Token") || "", "utf-8"),  Buffer.from(token, "utf-8"))) {
+      if (!timingSafeEqual(Buffer.from(req.header("X-Authentication-Token") || "", "utf-8"), Buffer.from(token, "utf-8"))) {
         return res.status(403).send("Unauthorized");
       }
       const uri = req.body["uri"];

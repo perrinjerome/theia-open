@@ -15,7 +15,7 @@ import { OpenEditorContribution } from "./open-editor-contribution";
 class OpenEditorBrowserServiceImpl implements OpenEditorBrowserService {
   constructor(
     @inject(EditorManager) private readonly editorManager: EditorManager
-  ) {}
+  ) { }
 
   async openFile(uri: string) {
     const widget = await this.editorManager.open(new URI(uri));
