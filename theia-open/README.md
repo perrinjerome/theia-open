@@ -10,8 +10,7 @@ This is a reimplementation of a [gitpod](https://gitpod.io/) feature.
 
 # Usage
 
-Start theia server with a token set as environment variable `THEIA_OPEN_EDITOR_TOKEN`.
-Client will need the same token to connect.
+Start theia server with a token set as environment variable `THEIA_OPEN_EDITOR_TOKEN`, set to a random string, for example the output of `openssl rand -hex 32` command. Client will need the same token to connect.
 
 Install client:
 ```
